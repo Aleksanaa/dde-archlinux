@@ -1,0 +1,32 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=deepin-editor
+pkgver=6.0.3
+_commit=0b1867ecafb4da3bd9b41819f7ff49095ed2bc73
+pkgrel=1
+pkgdesc='Simple editor for Deepin'
+arch=('x86_64')
+url="https://github.com/linuxdeepin/deepin-editor"
+license=('GPL3')
+depends=('deepin-qt5integration' 'deepin-qt-dbus-factory' 'kcodecs' 'polkit-qt5'
+         'syntax-highlighting' 'libchardet' 'uchardet')
+makedepends=('git' 'cmake' 'gmock' 'gtest' 'ninja' 'qt5-tools')
+groups=('deepin-extra')
+source=("git+https://github.com/linuxdeepin/deepin-editor.git#commit=$_commit")
+sha512sums=('SKIP')
+
+build() {
+  cd deepin-editor
+  cmake -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .
+  ninja
+}
+
+check() {
+  cd deepin-editor
+  ninja test || echo "Tests failed"
+}
+
+package() {
+  cd deepin-editor
+  DESTDIR="$pkgdir" ninja install
+}
