@@ -1,0 +1,30 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=deepin-anything-arch
+pkgver=6.1.2
+pkgrel=4
+pkgdesc="Deepin Anything file search tool, kernel module for Arch kernel"
+arch=('x86_64')
+url="https://github.com/linuxdeepin/deepin-anything"
+license=('GPL3')
+makedepends=('linux-headers')
+provides=('DEEPIN-ANYTHING-MODULE')
+replaces=('deepin-anything-module')
+source=("https://github.com/linuxdeepin/deepin-anything/archive/$pkgver/deepin-anything-$pkgver.tar.gz")
+sha512sums=('a69483f914aeee97b565a6191b21712b06dee1fe2076792ce0decf64da698b7c58ed64cf75073f2d2862c01c35ec1b29568f955bce8cb6b447ec9fa69c59f5e1')
+
+build() {
+  cd deepin-anything-$pkgver/src/kernelmod
+  make kdir=/usr/src/linux
+}
+
+package() {
+  depends=('linux')
+
+  cd deepin-anything-$pkgver/src/kernelmod
+
+  local extradir=/usr/lib/modules/$(</usr/src/linux/version)/extramodules
+  install -Dt "$pkgdir$extradir" -m644 *.ko
+  find "$pkgdir" -name '*.ko' -exec strip --strip-debug {} +
+  find "$pkgdir" -name '*.ko' -exec xz {} +
+}
