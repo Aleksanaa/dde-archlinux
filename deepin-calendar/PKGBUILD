@@ -9,7 +9,8 @@ pkgdesc='Calendar for Deepin Desktop Environment'
 arch=('x86_64')
 url="https://github.com/linuxdeepin/dde-calendar"
 license=('GPL3')
-depends=('deepin-qt5integration' 'dtkwidget' 'hicolor-icon-theme')
+depends=('deepin-qt5integration' 'dtkcore' 'dtkgui' 'dtkwidget'
+         'gcc-libs' 'libical' 'qt5-svg' 'qt5-base')
 makedepends=('cmake' 'ninja' 'qt5-tools')
 groups=('deepin')
 source=("https://github.com/linuxdeepin/dde-calendar/archive/refs/tags/$pkgver.tar.gz")
