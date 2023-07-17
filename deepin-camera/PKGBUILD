@@ -1,16 +1,19 @@
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 
 pkgname=deepin-camera
-pkgver=1.4.11
-_commit=0671cf59cb1c91247ea348a561ee6749a096a209
+pkgver=1.4.13
+_commit=af79293dd90438d7cd5e937b99ad9e9e727b7a37
 pkgrel=2
 pkgdesc='Tool to view camera, take photo and video'
 arch=('x86_64')
 url="https://github.com/linuxdeepin/deepin-camera"
 license=('GPL3')
-depends=('deepin-qt5integration' 'deepin-qt-dbus-factory' 'deepin-image-editor' 'ffmpeg'
-         'ffmpegthumbnailer' 'portaudio' 'pulseaudio' 'qt5-multimedia')
+depends=('deepin-qt5integration' 'dtkwidget' 'deepin-qt-dbus-factory' 'deepin-image-editor'
+	 'ffmpeg' 'ffmpegthumbnailer' 'portaudio' 'pulseaudio' 'qt5-multimedia')
 makedepends=('git' 'cmake' 'deepin-gettext-tools' 'ninja' 'qt5-tools')
+optdepends=('deepin-image-viewer: view camera photos'
+            'deepin-movie: view camera records'
+            'deepin-file-manager: open with other applications')
 groups=('deepin-extra')
 source=("git+https://github.com/linuxdeepin/deepin-camera.git#commit=$_commit")
 sha512sums=('SKIP')
