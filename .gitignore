@@ -1,0 +1,23 @@
+# https://github.com/anthraxx/arch-pkgbuilds/blob/master/.gitignore
+
+/*/*/
+.chroot/
+.repo/*/
+!.cache/urlwatch.db
+src/
+pkg/
+*.tgz
+*.tar.gz
+*.zip
+*.log
+*.gem
+*.jar
+*.tar.xz
+*.bz2
+*.tar.xz.sig
+*.asc
+*.sig
+*.7z
+*.xz
+*.lz
+*.sign
