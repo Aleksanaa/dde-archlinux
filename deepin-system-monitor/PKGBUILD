@@ -4,16 +4,18 @@
 
 pkgname=deepin-system-monitor
 pkgver=6.0.3
-pkgrel=5
+pkgrel=6
 pkgdesc='A more user-friendly system monitor'
 arch=('x86_64')
 url="https://github.com/linuxdeepin/deepin-system-monitor"
 license=('GPL3')
-depends=('deepin-qt5integration' 'deepin-dock' 'dtkwm' 'dwayland' 'libprocps' 'libcap')
+depends=('deepin-qt5integration' 'deepin-qt-dbus-factory' 'dtkcore' 'dtkgui' 'dtkwidget'
+         'dtkwm' 'dwayland' 'qt5-base' 'qt5-svg' 'gsettings-qt' 'icu' 'dconf' 'libxcb' 'xcb-util-wm'
+         'gcc-libs' 'libnl' 'libcap' 'libpcap' 'systemd-libs')
 makedepends=('cmake' 'deepin-gettext-tools' 'gtest' 'ninja' 'qt5-tools')
 groups=('deepin')
 install=deepin-system-monitor.install
-source=("$pkgname-$pkgver.tar.gz::https://github.com/linuxdeepin/deepin-system-monitor/archive/$pkgver.tar.gz"
+source=("https://github.com/linuxdeepin/deepin-system-monitor/archive/$pkgver/$pkgname-$pkgver.tar.gz"
         $pkgname-missing-symbol.patch::https://github.com/linuxdeepin/deepin-system-monitor/pull/205.patch
         a159e571.patch)
 sha512sums=('189c3283bb3fa88dccb2d3ce6aa542954c196a14d58a638de03f8f9c08573f697844ae4c1343f3034ac351c57ac5026c0bc0c9812c05bd8af346c994e3dbb8b0'
@@ -35,4 +37,5 @@ build() {
 package() {
   cd build
   DESTDIR="$pkgdir" ninja install
+  mv $pkgdir/usr/etc $pkgdir/etc
 }
