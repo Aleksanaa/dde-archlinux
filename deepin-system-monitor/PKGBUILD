@@ -30,12 +30,11 @@ prepare() {
 
 build() {
   cd build
-  cmake ../deepin-system-monitor-$pkgver -GNinja -DCMAKE_INSTALL_PREFIX=/usr
+  cmake ../deepin-system-monitor-$pkgver -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_SYSCONFDIR=/etc
   ninja
 }
 
 package() {
   cd build
   DESTDIR="$pkgdir" ninja install
-  mv $pkgdir/usr/etc $pkgdir/etc
 }
